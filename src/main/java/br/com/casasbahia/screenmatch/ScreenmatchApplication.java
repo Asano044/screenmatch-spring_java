@@ -25,21 +25,6 @@ public class ScreenmatchApplication implements CommandLineRunner {
 		System.out.println("Primeiro projeto Spring sem Web");
 
 		Principal menu = new Principal();
-		String json = menu.exibeMenu();
-
-		ConversaoDados conversor = new ConversaoDados();
-		var novoDoutor = conversor.obterDados(json, DadosSerie.class);
-		System.out.println(novoDoutor);
-
-//		String episodioDoutor = consumo.obterDados("https://www.omdbapi.com/?t=kamen+rider+build&Season=1&Episode=1&apikey=a745f28e");
-//		var episodioRose = conversor.obterDados(episodioDoutor, DadosEpisodio.class);
-//		System.out.println(episodioRose);
-
-//		List<DadosTemporada> temporadas = new ArrayList<>();
-//		for (int i = 1; i< novoDoutor.totalTemporadas(); i++) {
-//			json = consumo.obterDados("https://www.omdbapi.com/?t=kamen+rider+build&Season=" + i + "&apikey=a745f28e");
-//			temporadas.add(conversor.obterDados(json, DadosTemporada.class));
-//		}
-//		temporadas.forEach(System.out::println);
+		menu.exibeMenu();
 	}
 }
