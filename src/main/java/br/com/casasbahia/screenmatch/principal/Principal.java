@@ -1,6 +1,7 @@
 package br.com.casasbahia.screenmatch.principal;
 
 import br.com.casasbahia.screenmatch.model.ConversaoDados;
+import br.com.casasbahia.screenmatch.model.DadosEpisodio;
 import br.com.casasbahia.screenmatch.model.DadosSerie;
 import br.com.casasbahia.screenmatch.model.DadosTemporada;
 import br.com.casasbahia.screenmatch.service.ConsumoApi;
@@ -35,6 +36,8 @@ public class Principal {
 			temporadas.add(conversor.obterDados(json, DadosTemporada.class));
 		}
 		temporadas.forEach(System.out::println);
+
+        temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
 
 
     }
