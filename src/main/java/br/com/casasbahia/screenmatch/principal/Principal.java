@@ -6,9 +6,7 @@ import br.com.casasbahia.screenmatch.model.DadosSerie;
 import br.com.casasbahia.screenmatch.model.DadosTemporada;
 import br.com.casasbahia.screenmatch.service.ConsumoApi;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Principal {
     private ConsumoApi consumo = new ConsumoApi();
@@ -39,6 +37,14 @@ public class Principal {
 
         temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
 
+        List<DadosEpisodio> dadosEpisodios = temporadas.stream()
+                .flatMap(t -> t.episodios().stream())
+                .toList();
 
+        dadosEpisodios.stream()
+                .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
+                .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
+                .limit(5)
+                .forEach(System.out::println);
     }
 }
