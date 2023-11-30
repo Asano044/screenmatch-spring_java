@@ -3,6 +3,8 @@ package br.com.casasbahia.screenmatch.principal;
 import br.com.casasbahia.screenmatch.model.*;
 import br.com.casasbahia.screenmatch.service.ConsumoApi;
 
+import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -13,6 +15,7 @@ public class Principal {
     private Scanner leitura = new Scanner(System.in);
     private final String ENDERECO = "https://www.omdbapi.com/?t=";
     private final String API_KEY = "&apikey=a745f28e";
+    private Integer anoResposta;
 
     public void exibeMenu() {
         System.out.println("Informe o nome da série: ");
@@ -50,5 +53,19 @@ public class Principal {
                     .map(d -> new Episodio(t.numero(), d))
                         ).collect(Collectors.toList());
         episodios.forEach(System.out::println);
+
+        System.out.println("A partir de qual ano você quer ver os episódios da série? ");
+        this.anoResposta = leitura.nextInt();
+        leitura.nextLine();
+
+        episodios.stream()
+                .filter(e -> e.getDataLancamento().getYear() >= anoResposta)
+                .forEach(e -> System.out.println(
+                        "Temporada: " + e.getTemporada() +
+                                " Episódio: " + e.getEpisodio() +
+                                " Titulo: " + e.getTitulo() +
+                                " Data Lançamento: " + e.getDataLancamento()
+                ));
+
     }
 }
