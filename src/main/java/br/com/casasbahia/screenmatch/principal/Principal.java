@@ -3,9 +3,10 @@ package br.com.casasbahia.screenmatch.principal;
 import br.com.casasbahia.screenmatch.model.*;
 import br.com.casasbahia.screenmatch.service.ConsumoApi;
 
-import java.text.DateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Principal {

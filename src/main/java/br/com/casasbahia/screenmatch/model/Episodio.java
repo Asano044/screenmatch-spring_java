@@ -1,8 +1,5 @@
 package br.com.casasbahia.screenmatch.model;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-import org.springframework.cglib.core.Local;
-
 import java.time.LocalDate;
 
 public class Episodio {
