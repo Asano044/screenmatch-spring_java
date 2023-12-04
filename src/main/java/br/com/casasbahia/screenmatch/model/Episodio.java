@@ -1,6 +1,7 @@
 package br.com.casasbahia.screenmatch.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Episodio {
     private Integer temporada;
@@ -17,8 +18,11 @@ public class Episodio {
             this.avaliacao = Double.valueOf(dadosEpisodio.avaliacao());
         } catch (NumberFormatException ex) {
             this.avaliacao = 0.0;
+        } try {
+            this.dataLancamento = LocalDate.parse(dadosEpisodio.dataLancamento());
+        } catch (DateTimeParseException ex) {
+            this.dataLancamento = null;
         }
-        this.dataLancamento = LocalDate.parse(dadosEpisodio.dataLancamento());
     }
 
     public Integer getTemporada() {

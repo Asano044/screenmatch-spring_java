@@ -3,6 +3,7 @@ package br.com.casasbahia.screenmatch.principal;
 import br.com.casasbahia.screenmatch.model.*;
 import br.com.casasbahia.screenmatch.service.ConsumoApi;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -59,13 +60,15 @@ public class Principal {
         this.anoResposta = leitura.nextInt();
         leitura.nextLine();
 
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         episodios.stream()
                 .filter(e -> e.getDataLancamento().getYear() >= anoResposta)
                 .forEach(e -> System.out.println(
                         "Temporada: " + e.getTemporada() +
                                 " Episódio: " + e.getEpisodio() +
                                 " Titulo: " + e.getTitulo() +
-                                " Data Lançamento: " + e.getDataLancamento()
+                                " - Data Lançamento: " + e.getDataLancamento().format(formatador)
                 ));
 
     }
