@@ -1,6 +1,5 @@
 package br.com.casasbahia.screenmatch;
 
-import br.com.casasbahia.screenmatch.principal.Principal;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,9 +14,6 @@ public class ScreenmatchApplication implements CommandLineRunner {
 	@Override
 	public void run(String...args) {
 		System.out.println("Primeiro projeto Spring sem Web");
-
-		Principal menu = new Principal();
-		menu.exibeMenu();
 
 
 	}
