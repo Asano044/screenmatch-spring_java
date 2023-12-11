@@ -1,15 +1,14 @@
 package br.com.casasbahia.screenmatch;
 
-import br.com.casasbahia.screenmatch.model.ConverteDados;
-import br.com.casasbahia.screenmatch.model.DadosEpisodio;
 import br.com.casasbahia.screenmatch.model.DadosSerie;
 import br.com.casasbahia.screenmatch.model.DadosTemporada;
 import br.com.casasbahia.screenmatch.principal.Principal;
-import br.com.casasbahia.screenmatch.service.ConsumoApi;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cglib.core.Converter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class ScreenmatchApplication implements CommandLineRunner {
@@ -37,11 +36,12 @@ public class ScreenmatchApplication implements CommandLineRunner {
 //		dadosEpisodio = conversor.obterDados(json, DadosEpisodio.class);
 //		System.out.println(dadosEpisodio);
 //
+//		List<DadosTemporada> temporadas = new ArrayList<>();
 //		for (int i = 1; i <= dadosSerie.totalTemporadas(); i++) {
 //			json = consumo.obterDados("https://www.omdbapi.com/?t=doctor+who&Season=" + i +
 //					"&apikey=a745f28e");
-//			dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
-//			System.out.println(dadosTemporada);
+//			temporadas.add(conversor.obterDados(json, DadosTemporada.class));
 //		}
-	}
-}
+//		temporadas.forEach(System.out::println);
+//	}
+//}
