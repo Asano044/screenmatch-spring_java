@@ -1,9 +1,6 @@
 package br.com.casasbahia.screenmatch.principal;
 
-import br.com.casasbahia.screenmatch.model.ConverteDados;
-import br.com.casasbahia.screenmatch.model.DadosEpisodio;
-import br.com.casasbahia.screenmatch.model.DadosSerie;
-import br.com.casasbahia.screenmatch.model.DadosTemporada;
+import br.com.casasbahia.screenmatch.model.*;
 import br.com.casasbahia.screenmatch.service.ConsumoApi;
 
 import java.util.ArrayList;
@@ -43,9 +40,22 @@ public class Principal {
                         .flatMap(t -> t.episodio().stream())
                                 .toList();
 //        Filtrando os 5 melhores episódios da série
-        dadosEpisodios.stream()
-                .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
-                .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
+//        dadosEpisodios.stream()
+//                .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
+//                .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
+//                .limit(5)
+//                .forEach(System.out::println);
+
+        List<Episodio> episodios = temporadas.stream()
+                .flatMap(t -> t.episodio().stream()
+                        .map(d -> new Episodio(t.numero(), d))
+                ).toList();
+
+//        Filtrando os 5 melhores episódios - adaptado
+        System.out.println("\nOs 5 melhores episódios\n");
+        episodios.stream()
+                .filter(e -> e.getAvaliacao()>0.0)
+                .sorted(Comparator.comparing(Episodio::getAvaliacao).reversed())
                 .limit(5)
                 .forEach(System.out::println);
     }
