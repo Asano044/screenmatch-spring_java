@@ -3,10 +3,9 @@ package br.com.casasbahia.screenmatch.principal;
 import br.com.casasbahia.screenmatch.model.*;
 import br.com.casasbahia.screenmatch.service.ConsumoApi;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class Principal {
     private Scanner leitura = new Scanner(System.in);
@@ -58,5 +57,21 @@ public class Principal {
                 .sorted(Comparator.comparing(Episodio::getAvaliacao).reversed())
                 .limit(5)
                 .forEach(System.out::println);
+
+//        Filtrando os episódios exibidos com base no ano informado
+        System.out.println("Deseja ver os episódios lançados a partir de qual ano: ");
+        int anoResposta = leitura.nextInt();
+        leitura.nextLine();
+
+        LocalDate dataFiltro = LocalDate.of(anoResposta, 1, 1);
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        episodios.stream()
+                .filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataFiltro))
+                .forEach(e -> System.out.println(
+                        "( Temporada: " + e.getTemporada() +
+                        ", Episódio: " + e.getTitulo() +
+                        " - Data de Lançamento: " + e.getDataLancamento().format(formatador) + " )"
+                ));
     }
 }
