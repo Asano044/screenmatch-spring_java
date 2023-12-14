@@ -3,9 +3,11 @@ package br.com.casasbahia.screenmatch.principal;
 import br.com.casasbahia.screenmatch.model.*;
 import br.com.casasbahia.screenmatch.service.ConsumoApi;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.DoubleSummaryStatistics;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Principal {
     private Scanner leitura = new Scanner(System.in);
@@ -51,21 +53,21 @@ public class Principal {
                 ).toList();
 
 //        Filtro para exibir o episódio informado
-        System.out.println("Informe um trecho do episódio: ");
-        String resposta = leitura.nextLine();
-
-        Optional<Episodio> episodioBuscado = episodios.stream()
-                .filter(e -> e.getTitulo().toUpperCase().contains(resposta.toUpperCase()))
-                .findFirst();
-        if (episodioBuscado.isPresent()) {
-            System.out.println("Episódio encontrado!");
-            System.out.println(
-                    "Temporada: " + episodioBuscado.get().getTemporada() +
-                            ", Episódio: " + episodioBuscado.get().getTitulo()
-            );
-        } else {
-            System.out.println("Episódio não encontrado!");
-        }
+//        System.out.println("Informe um trecho do episódio: ");
+//        String resposta = leitura.nextLine();
+//
+//        Optional<Episodio> episodioBuscado = episodios.stream()
+//                .filter(e -> e.getTitulo().toUpperCase().contains(resposta.toUpperCase()))
+//                .findFirst();
+//        if (episodioBuscado.isPresent()) {
+//            System.out.println("Episódio encontrado!");
+//            System.out.println(
+//                    "Temporada: " + episodioBuscado.get().getTemporada() +
+//                            ", Episódio: " + episodioBuscado.get().getTitulo()
+//            );
+//        } else {
+//            System.out.println("Episódio não encontrado!");
+//        }
 
 //        Filtrando os 5 melhores episódios - adaptado
 //        System.out.println("\nOs 5 melhores episódios\n");
@@ -90,5 +92,21 @@ public class Principal {
 //                        ", Episódio: " + e.getTitulo() +
 //                        " - Data de Lançamento: " + e.getDataLancamento().format(formatador) + " )"
 //                ));
+//        Atribuindo notas às temporadas baseada na respectiva média
+//        Map<Integer, Double> mediaTemporadas = episodios.stream()
+//                .filter(e -> e.getAvaliacao() > 0.0)
+//                .collect(Collectors.groupingBy(Episodio::getTemporada,
+//                        Collectors.averagingDouble(Episodio::getAvaliacao)
+//                ));
+//        System.out.println(mediaTemporadas);
+
+//        Coletando dados estatísticos da série
+        DoubleSummaryStatistics est = episodios.stream()
+                .filter(e -> e.getAvaliacao() > 0.0)
+                .collect(Collectors.summarizingDouble(Episodio::getAvaliacao));
+        System.out.println("Quantidade de avaliações: " + est.getCount());
+        System.out.println("Média das avaliações: " + est.getAverage());
+        System.out.println("Melhor episódio: " + est.getMax());
+        System.out.println("Pior episódio: " + est.getMin());
     }
 }

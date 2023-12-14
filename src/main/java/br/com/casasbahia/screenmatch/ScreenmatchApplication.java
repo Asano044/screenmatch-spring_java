@@ -1,14 +1,9 @@
 package br.com.casasbahia.screenmatch;
 
-import br.com.casasbahia.screenmatch.model.DadosSerie;
-import br.com.casasbahia.screenmatch.model.DadosTemporada;
 import br.com.casasbahia.screenmatch.principal.Principal;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
 public class ScreenmatchApplication implements CommandLineRunner {
