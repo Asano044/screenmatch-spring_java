@@ -50,28 +50,45 @@ public class Principal {
                         .map(d -> new Episodio(t.numero(), d))
                 ).toList();
 
+//        Filtro para exibir o episódio informado
+        System.out.println("Informe um trecho do episódio: ");
+        String resposta = leitura.nextLine();
+
+        Optional<Episodio> episodioBuscado = episodios.stream()
+                .filter(e -> e.getTitulo().toUpperCase().contains(resposta.toUpperCase()))
+                .findFirst();
+        if (episodioBuscado.isPresent()) {
+            System.out.println("Episódio encontrado!");
+            System.out.println(
+                    "Temporada: " + episodioBuscado.get().getTemporada() +
+                            ", Episódio: " + episodioBuscado.get().getTitulo()
+            );
+        } else {
+            System.out.println("Episódio não encontrado!");
+        }
+
 //        Filtrando os 5 melhores episódios - adaptado
-        System.out.println("\nOs 5 melhores episódios\n");
-        episodios.stream()
-                .filter(e -> e.getAvaliacao()>0.0)
-                .sorted(Comparator.comparing(Episodio::getAvaliacao).reversed())
-                .limit(5)
-                .forEach(System.out::println);
+//        System.out.println("\nOs 5 melhores episódios\n");
+//        episodios.stream()
+//                .filter(e -> e.getAvaliacao()>0.0)
+//                .sorted(Comparator.comparing(Episodio::getAvaliacao).reversed())
+//                .limit(5)
+//                .forEach(System.out::println);
 
 //        Filtrando os episódios exibidos com base no ano informado
-        System.out.println("Deseja ver os episódios lançados a partir de qual ano: ");
-        int anoResposta = leitura.nextInt();
-        leitura.nextLine();
-
-        LocalDate dataFiltro = LocalDate.of(anoResposta, 1, 1);
-        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        episodios.stream()
-                .filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataFiltro))
-                .forEach(e -> System.out.println(
-                        "( Temporada: " + e.getTemporada() +
-                        ", Episódio: " + e.getTitulo() +
-                        " - Data de Lançamento: " + e.getDataLancamento().format(formatador) + " )"
-                ));
+//        System.out.println("Deseja ver os episódios lançados a partir de qual ano: ");
+//        int anoResposta = leitura.nextInt();
+//        leitura.nextLine();
+//
+//        LocalDate dataFiltro = LocalDate.of(anoResposta, 1, 1);
+//        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//
+//        episodios.stream()
+//                .filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataFiltro))
+//                .forEach(e -> System.out.println(
+//                        "( Temporada: " + e.getTemporada() +
+//                        ", Episódio: " + e.getTitulo() +
+//                        " - Data de Lançamento: " + e.getDataLancamento().format(formatador) + " )"
+//                ));
     }
 }
